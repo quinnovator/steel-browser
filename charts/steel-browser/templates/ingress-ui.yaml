@@ -28,12 +28,12 @@ spec:
     {{- end }}
   {{- if .Values.ui.ingress.tls }}
   tls:
-    {{- range .Values.ui.ingress.tls }}
+    {{- range $tls := .Values.ui.ingress.tls }}
     - hosts:
-      {{- range .hosts }}
-        - {{ . }}
+      {{- range $host := $tls.hosts }}
+        - {{ $host }}
       {{- end }}
-      secretName: {{ .secretName }}
+      secretName: {{ $tls.secretName }}
     {{- end }}
   {{- end }}
 {{- end }}
