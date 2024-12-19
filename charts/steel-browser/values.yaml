@@ -20,7 +20,7 @@ api:
       - host: "api.example.com"
         path: "/"
     tls: []
-  
+
 ui:
   image: "ghcr.io/steel-dev/steel-browser-ui:latest"
   port: 5173
@@ -37,10 +37,6 @@ ui:
       - host: "ui.example.com"
         path: "/"
     tls: []
-
-serviceAccount:
-  create: true
-  name: ""
 
 imagePullSecrets: []
 fullnameOverride: ""
