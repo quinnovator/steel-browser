@@ -1,0 +1,52 @@
+replicaCount: 1
+
+api:
+  image: "ghcr.io/steel-dev/steel-browser-api:latest"
+  port: 3000
+  wsPort: 9223
+  env:
+    NODE_ENV: "production"
+    HOST: "0.0.0.0"
+    PORT: "3000"
+    DOMAIN: "example.com"
+    PROXY_URL: ""
+    DEFAULT_HEADERS: "{}"
+  resources: {}
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+    hosts:
+      - host: "api.example.com"
+        path: "/"
+    tls: []
+  
+ui:
+  image: "ghcr.io/steel-dev/steel-browser-ui:latest"
+  port: 5173
+  env:
+    VITE_API_URL: "http://api:3000"
+    VITE_WS_URL: "ws://api:3000"
+    VITE_OPENAPI_URL: "http://api:3000/documentation/json"
+  resources: {}
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+    hosts:
+      - host: "ui.example.com"
+        path: "/"
+    tls: []
+
+serviceAccount:
+  create: true
+  name: ""
+
+imagePullSecrets: []
+fullnameOverride: ""
+nameOverride: ""
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

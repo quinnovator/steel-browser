@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "steel-browser.fullname" . }}-ui
+  labels:
+    app.kubernetes.io/name: {{ include "steel-browser.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: ui
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    app.kubernetes.io/part-of: {{ include "steel-browser.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "steel-browser.name" . }}
+      app.kubernetes.io/component: ui
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "steel-browser.name" . }}
+        app.kubernetes.io/component: ui
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ if .Values.serviceAccount.name }}{{ .Values.serviceAccount.name }}{{ else }}{{ include "steel-browser.serviceAccountName" . }}{{ end }}
+      containers:
+        - name: ui
+          image: {{ .Values.ui.image }}
+          env:
+            {{- range $key, $value := .Values.ui.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+          ports:
+            - containerPort: {{ .Values.ui.port }}
+          resources:
+{{- toYaml .Values.ui.resources | nindent 12 }}
