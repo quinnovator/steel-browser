@@ -33,4 +33,4 @@ spec:
           ports:
             - containerPort: {{ .Values.ui.port }}
           resources:
-{{- toYaml .Values.ui.resources | nindent 12 }}
+            {{- toYaml .Values.ui.resources | nindent 12 }}

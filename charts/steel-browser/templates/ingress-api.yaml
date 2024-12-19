@@ -28,11 +28,11 @@ spec:
     {{- end }}
   {{- if .Values.api.ingress.tls }}
   tls:
-    {{- range .Values.api.ingress.tls }}
+    {{- range .Values.ui.ingress.tls }}
     - hosts:
-      {{- range .hosts }}
+        {{- range .hosts }}
         - {{ . }}
-      {{- end }}
+        {{- end }}
       secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
