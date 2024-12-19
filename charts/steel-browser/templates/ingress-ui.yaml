@@ -22,7 +22,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "steel-browser.fullname" $. }}-ui
+                name: {{ include "steel-browser.fullname" $ }}-ui
                 port:
                   number: 80
     {{- end }}
