@@ -21,7 +21,7 @@ spec:
         app.kubernetes.io/component: ui
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-      serviceAccountName: "{{ if .Values.serviceAccount.name }}{{ .Values.serviceAccount.name }}{{ else }}{{ include "steel-browser.serviceAccountName" . }}{{ end }}"
+      serviceAccountName: "{{- if .Values.serviceAccount.name -}}{{ .Values.serviceAccount.name }}{{- else -}}{{ include "steel-browser.serviceAccountName" . }}{{- end -}}"
       containers:
         - name: ui
           image: {{ .Values.ui.image }}
