@@ -9,10 +9,10 @@ Expand the name of the chart.
 Create a fullname using the release name and chart name
 */}}
 {{- define "steel-browser.fullname" -}}
-{{- if .Values.fullnameOverride }}
+{{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else }}
-{{- printf "%s-%s" .Release.Name (include "steel-browser.name" .) | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 
@@ -20,9 +20,9 @@ Create a fullname using the release name and chart name
 ServiceAccount name
 */}}
 {{- define "steel-browser.serviceAccountName" -}}
-{{- if .Values.serviceAccount.name }}
+{{- if .Values.serviceAccount.name -}}
 {{- .Values.serviceAccount.name | trunc 63 | trimSuffix "-" -}}
-{{- else }}
-{{ include "steel-browser.fullname" . }}-sa
+{{- else -}}
+{{- printf "%s-sa" (include "steel-browser.fullname" .) -}}
 {{- end -}}
 {{- end -}}
