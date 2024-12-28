@@ -11,6 +11,9 @@ api:
     DOMAIN: "example.com"
     PROXY_URL: ""
     DEFAULT_HEADERS: "{}"
+  service:
+    type: ClusterIP
+    annotations: {}
   resources: {}
   ingress:
     enabled: false
