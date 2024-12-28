@@ -6,8 +6,12 @@ metadata:
     app.kubernetes.io/name: {{ include "steel-browser.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: api
+  {{- with .Values.api.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  type: ClusterIP
+  type: {{ .Values.api.service.type }}
   selector:
     app.kubernetes.io/name: {{ include "steel-browser.name" . }}
     app.kubernetes.io/component: api
